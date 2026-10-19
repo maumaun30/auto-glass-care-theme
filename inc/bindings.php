@@ -27,6 +27,10 @@ function agc_bindable_fields(): array {
 		'hours'            => __( 'Hours', 'auto-glass-care' ),
 		'service_areas'    => __( 'Service areas', 'auto-glass-care' ),
 		'experience_years' => __( 'Years of experience', 'auto-glass-care' ),
+		'rating_value'     => __( 'Average rating', 'auto-glass-care' ),
+		'rating_count'     => __( 'Number of reviews', 'auto-glass-care' ),
+		'reviews_url'      => __( 'Reviews page URL', 'auto-glass-care' ),
+		'financing_url'    => __( 'Financing URL', 'auto-glass-care' ),
 		'social_facebook'  => 'Facebook URL',
 		'social_google'    => 'Google Business URL',
 		'social_yelp'      => 'Yelp URL',
@@ -40,9 +44,10 @@ function agc_bindable_value( string $key ): ?string {
 	}
 
 	return match ( $key ) {
-		'phone_url' => agc_phone_url( (string) agc_get_setting( 'phone' ) ),
-		'email_url' => 'mailto:' . antispambot( (string) agc_get_setting( 'email' ) ),
-		default     => (string) agc_get_setting( $key ),
+		'phone_url'     => agc_phone_url( (string) agc_get_setting( 'phone' ) ),
+		'email_url'     => 'mailto:' . antispambot( (string) agc_get_setting( 'email' ) ),
+		'financing_url' => (string) ( agc_get_setting( 'financing_url' ) ?: '#quote' ),
+		default         => (string) agc_get_setting( $key ),
 	};
 }
 

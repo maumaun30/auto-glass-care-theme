@@ -23,10 +23,14 @@ WordPress block (FSE) theme "Auto Glass Care", built to be reused across shop we
 ## Blocks and patterns
 - Custom blocks in `blocks/*/` are dynamic: `render.php` + `save: () => null`, and the editor previews them through `ServerSideRender`.
 - Patterns are PHP (`patterns/*.php`) so they can use `AGC_URI` and the settings. `parts/header.html` and `parts/footer.html` only reference the `auto-glass-care/header` and `auto-glass-care/footer` patterns.
-- Hand-written block markup must match core's saved HTML exactly (class lists, `is-resized` and so on), or the editor flags it as "invalid block".
+- Hand-written block markup must match core's saved HTML exactly (class lists, `is-resized` and so on), or the editor flags it as "invalid block". Prefer building sections with the `agc_b_*` helpers in `inc/markup.php`. New page sections go in `inc/sections.php` as `agc_section_*()` and are shared by the section and page patterns.
+- WP caches theme pattern files by theme version. Bump `Version` in `style.css` + `AGC_VERSION` when adding or renaming patterns, or they won't appear outside dev mode.
+- Pages containing the class `agc-service-hero` automatically get the `page-no-title` template (filter in `inc/setup.php`).
 
 ## Local testing
 - `docker compose -f .dev/compose.yml up -d` starts WordPress on http://localhost:8089 with the theme mounted read-only.
 - WP-CLI: `docker compose -f .dev/compose.yml exec -T cli wp <command>`.
 - After changes, lint with `php -l` and curl the main routes. Treat any `Warning`/`Fatal` in the output as a failure.
+- Check block validity in the editor (wp-admin page, browser console): `wp.blocks.parse(content)` and look for `isValid === false`.
+- Build a release zip with `.dev/build-zip.sh` (writes to `dist/`).
 - `.dev/*.sql` dumps are gitignored. `.distignore` keeps `.dev/` and `CLAUDE.md` out of release zips.

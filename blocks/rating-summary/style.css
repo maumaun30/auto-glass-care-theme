@@ -1,0 +1,48 @@
+.wp-block-agc-rating-summary {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	text-align: center;
+}
+
+.wp-block-agc-rating-summary.has-text-align-left {
+	align-items: flex-start;
+}
+
+.wp-block-agc-rating-summary .agc-rating__stars {
+	--agc-star-size: 1.75rem;
+	position: relative;
+	display: inline-block;
+	font-size: var(--agc-star-size);
+	line-height: 1;
+	letter-spacing: 0.15em;
+	color: var(--wp--preset--color--border);
+}
+
+.wp-block-agc-rating-summary .agc-rating__stars::before {
+	content: "★★★★★";
+}
+
+.wp-block-agc-rating-summary .agc-rating__stars::after {
+	content: "★★★★★";
+	position: absolute;
+	inset: 0 auto 0 0;
+	width: var(--agc-rating, 100%);
+	overflow: hidden;
+	color: var(--wp--preset--color--gold);
+	white-space: nowrap;
+}
+
+.wp-block-agc-rating-summary p {
+	margin: 0;
+}
+
+.wp-block-agc-rating-summary .agc-rating__headline {
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: var(--wp--preset--font-size--x-large);
+}
+
+.wp-block-agc-rating-summary .agc-rating__count a {
+	color: inherit;
+}

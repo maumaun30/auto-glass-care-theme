@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Band",
+	"slug": "section-band",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"spacing": {
+			"padding": {
+				"top": "var(--wp--preset--spacing--50)",
+				"bottom": "var(--wp--preset--spacing--50)"
+			}
+		}
+	}
+}

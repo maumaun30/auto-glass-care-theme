@@ -33,7 +33,7 @@
 	color: var(--wp--preset--color--accent);
 }
 
-.wp-block-agc-quote-form input:not([type="radio"]),
+.wp-block-agc-quote-form input:not([type="radio"]):not([type="checkbox"]),
 .wp-block-agc-quote-form select,
 .wp-block-agc-quote-form textarea {
 	box-sizing: border-box;
@@ -106,4 +106,23 @@
 	.wp-block-agc-quote-form .agc-quote-form__form {
 		grid-template-columns: 1fr;
 	}
+}
+
+.wp-block-agc-quote-form .agc-quote-form__consent label {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.6em;
+	padding: 0;
+	font-size: 0.8125rem;
+	line-height: 1.5;
+}
+
+.wp-block-agc-quote-form .agc-quote-form__consent input {
+	flex: none;
+	margin-top: 0.2em;
+}
+
+.wp-block-agc-quote-form textarea {
+	min-height: 110px;
+	resize: vertical;
 }

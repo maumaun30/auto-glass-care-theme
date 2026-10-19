@@ -44,6 +44,15 @@ function agc_settings_fields(): array {
 				'social_x'         => array( 'type' => 'url', 'label' => 'X (Twitter)', 'default' => '' ),
 			),
 		),
+		'reviews'  => array(
+			'title'  => __( 'Reviews & financing', 'auto-glass-care' ),
+			'fields' => array(
+				'rating_value'  => array( 'type' => 'text', 'label' => __( 'Average rating (out of 5)', 'auto-glass-care' ), 'default' => '4.9' ),
+				'rating_count'  => array( 'type' => 'number', 'label' => __( 'Number of reviews', 'auto-glass-care' ), 'default' => 1500 ),
+				'reviews_url'   => array( 'type' => 'url', 'label' => __( 'Reviews page URL', 'auto-glass-care' ), 'default' => 'https://share.google/pRtf2DWTI0hdZiJtg', 'help' => __( 'Where the rating summary links to, e.g. your Google Business profile.', 'auto-glass-care' ) ),
+				'financing_url' => array( 'type' => 'url', 'label' => __( 'Financing application URL', 'auto-glass-care' ), 'default' => '', 'help' => __( 'Used by the financing banner button. Leave empty to link to the quote form.', 'auto-glass-care' ) ),
+			),
+		),
 		'quote'    => array(
 			'title'  => __( 'Quote form', 'auto-glass-care' ),
 			'fields' => array(

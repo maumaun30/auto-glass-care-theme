@@ -1,6 +1,6 @@
 <?php
 /**
- * Quote form submissions: stored as private "Quote Requests" and emailed to the shop.
+ * Quote and contact form submissions: stored as private "Quote Requests" (menu: Leads) and emailed to the shop.
  *
  * Uses a honeypot + minimum fill time instead of a nonce so the form keeps working
  * behind full-page caching.
@@ -14,22 +14,34 @@ const AGC_QUOTE_POST_TYPE = 'agc_quote';
 const AGC_QUOTE_MIN_SECONDS = 3;
 
 /**
- * Submitted fields: name => [label, sanitizer, required].
+ * Submitted fields: name => [label, sanitizer]. Every form variant posts a subset of these.
  */
 function agc_quote_fields(): array {
 	return array(
-		'service'        => array( __( 'Service', 'auto-glass-care' ), 'sanitize_text_field', true ),
-		'vehicle_make'   => array( __( 'Vehicle make', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'vehicle_model'  => array( __( 'Vehicle model', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'vehicle_year'   => array( __( 'Vehicle year', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'first_name'     => array( __( 'First name', 'auto-glass-care' ), 'sanitize_text_field', true ),
-		'last_name'      => array( __( 'Last name', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'phone'          => array( __( 'Phone', 'auto-glass-care' ), 'sanitize_text_field', true ),
-		'email'          => array( __( 'Email', 'auto-glass-care' ), 'sanitize_email', true ),
-		'contact_method' => array( __( 'Preferred contact method', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'mailing_list'   => array( __( 'Join mailing list', 'auto-glass-care' ), 'sanitize_text_field', false ),
-		'message'        => array( __( 'Message', 'auto-glass-care' ), 'sanitize_textarea_field', false ),
+		'service'        => array( __( 'Service', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'vehicle'        => array( __( 'Vehicle', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'vehicle_make'   => array( __( 'Vehicle make', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'vehicle_model'  => array( __( 'Vehicle model', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'vehicle_year'   => array( __( 'Vehicle year', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'first_name'     => array( __( 'First name', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'last_name'      => array( __( 'Last name', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'phone'          => array( __( 'Phone', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'email'          => array( __( 'Email', 'auto-glass-care' ), 'sanitize_email' ),
+		'contact_method' => array( __( 'Preferred contact method', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'mailing_list'   => array( __( 'Join mailing list', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'sms_consent'    => array( __( 'SMS consent', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'subject'        => array( __( 'Subject', 'auto-glass-care' ), 'sanitize_text_field' ),
+		'message'        => array( __( 'Message', 'auto-glass-care' ), 'sanitize_textarea_field' ),
 	);
+}
+
+/**
+ * Required fields per form variant (see the Quote Form block's "variant" attribute).
+ */
+function agc_form_required_fields( string $variant ): array {
+	return 'contact' === $variant
+		? array( 'first_name', 'email', 'message' )
+		: array( 'service', 'first_name', 'phone', 'email' );
 }
 
 add_action(
@@ -40,6 +52,7 @@ add_action(
 			array(
 				'labels'          => array(
 					'name'          => __( 'Quote Requests', 'auto-glass-care' ),
+					'menu_name'     => __( 'Leads', 'auto-glass-care' ),
 					'singular_name' => __( 'Quote Request', 'auto-glass-care' ),
 				),
 				'public'          => false,
@@ -67,10 +80,13 @@ function agc_handle_quote(): void {
 		agc_quote_redirect( $redirect, 'sent' );
 	}
 
+	$variant  = 'contact' === ( $_POST['agc_form'] ?? '' ) ? 'contact' : 'quote'; // phpcs:ignore WordPress.Security.NonceVerification
+	$required = agc_form_required_fields( $variant );
+
 	$data = array();
-	foreach ( agc_quote_fields() as $key => [ $label, $sanitize, $required ] ) {
+	foreach ( agc_quote_fields() as $key => [ $label, $sanitize ] ) {
 		$value = call_user_func( $sanitize, wp_unslash( $_POST[ $key ] ?? '' ) ); // phpcs:ignore WordPress.Security.NonceVerification, WordPress.Security.ValidatedSanitizedInput
-		if ( $required && '' === $value ) {
+		if ( '' === $value && in_array( $key, $required, true ) ) {
 			agc_quote_redirect( $redirect, 'error' );
 		}
 		$data[ $key ] = $value;
@@ -80,7 +96,8 @@ function agc_handle_quote(): void {
 		agc_quote_redirect( $redirect, 'error' );
 	}
 
-	$title = trim( $data['first_name'] . ' ' . $data['last_name'] ) . ' — ' . $data['service'];
+	$topic = 'contact' === $variant ? ( $data['subject'] ?: __( 'Contact message', 'auto-glass-care' ) ) : $data['service'];
+	$title = trim( $data['first_name'] . ' ' . $data['last_name'] ) . ' — ' . $topic;
 
 	$post_id = wp_insert_post(
 		array(
@@ -102,7 +119,7 @@ function agc_handle_quote(): void {
 	$sent = wp_mail(
 		$to,
 		/* translators: %s: customer name and service */
-		sprintf( __( 'New quote request: %s', 'auto-glass-care' ), $title ),
+		sprintf( 'contact' === $variant ? __( 'New message: %s', 'auto-glass-care' ) : __( 'New quote request: %s', 'auto-glass-care' ), $title ),
 		implode( "\n", $lines ),
 		array( 'Reply-To: ' . $data['email'] )
 	);
@@ -125,7 +142,10 @@ add_action(
 				$data = (array) get_post_meta( $post->ID, '_agc_quote', true );
 				echo '<table class="widefat striped"><tbody>';
 				foreach ( agc_quote_fields() as $key => [ $label ] ) {
-					printf( '<tr><th>%s</th><td>%s</td></tr>', esc_html( $label ), nl2br( esc_html( $data[ $key ] ?? '' ) ) );
+					if ( '' === ( $data[ $key ] ?? '' ) ) {
+						continue;
+					}
+					printf( '<tr><th>%s</th><td>%s</td></tr>', esc_html( $label ), nl2br( esc_html( $data[ $key ] ) ) );
 				}
 				echo '</tbody></table>';
 			},

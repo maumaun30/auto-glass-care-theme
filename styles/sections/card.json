@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Card",
+	"slug": "card",
+	"blockTypes": [
+		"core/group",
+		"core/column"
+	],
+	"styles": {
+		"color": {
+			"background": "var(--wp--preset--color--base)",
+			"text": "var(--wp--preset--color--foreground)"
+		},
+		"border": {
+			"radius": "16px",
+			"color": "rgba(0,0,0,0.08)",
+			"style": "solid",
+			"width": "1px"
+		},
+		"shadow": "0px 30px 50px -35px rgba(0,0,0,0.35)",
+		"spacing": {
+			"padding": {
+				"top": "30px",
+				"bottom": "30px",
+				"left": "30px",
+				"right": "30px"
+			},
+			"blockGap": "0.75rem"
+		},
+		"elements": {
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--contrast)"
+				}
+			}
+		}
+	}
+}

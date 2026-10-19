@@ -5,17 +5,22 @@
 	"title": "Quote Form",
 	"category": "auto-glass-care",
 	"icon": "feedback",
-	"description": "Vehicle quote request form. Submissions are saved under Quote Requests and emailed to the address in Theme Settings.",
-	"keywords": [ "form", "quote", "contact", "estimate" ],
+	"description": "Quote request or contact form. Submissions are saved under Leads and emailed to the address in Theme Settings.",
+	"keywords": [ "form", "quote", "contact", "estimate", "email" ],
 	"textdomain": "auto-glass-care",
 	"attributes": {
-		"showVehicle": { "type": "boolean", "default": true },
+		"variant": { "type": "string", "default": "quote", "enum": [ "quote", "contact" ] },
+		"services": { "type": "string", "default": "" },
+		"serviceLabel": { "type": "string", "default": "Select A Service" },
+		"vehicle": { "type": "string", "default": "split", "enum": [ "split", "single", "none" ] },
+		"contactMethods": { "type": "string", "default": "Email, Phone" },
 		"showMessage": { "type": "boolean", "default": false },
+		"showConsent": { "type": "boolean", "default": false },
+		"consentText": { "type": "string", "default": "By checking this box, I agree to receive text messages about my appointment, updates and billing. Message and data rates may apply. Reply STOP to opt out." },
 		"submitLabel": { "type": "string", "default": "Send" }
 	},
 	"supports": {
 		"html": false,
-		"multiple": false,
 		"anchor": true,
 		"color": { "text": true, "background": true },
 		"spacing": { "margin": true, "padding": true }

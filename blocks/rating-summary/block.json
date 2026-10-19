@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/rating-summary",
+	"title": "Rating Summary",
+	"category": "auto-glass-care",
+	"icon": "star-filled",
+	"description": "Star rating and review count from Theme Settings, linking to your reviews page.",
+	"keywords": [ "reviews", "stars", "rating", "testimonials" ],
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"showLink": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false,
+		"color": { "text": true, "link": true },
+		"spacing": { "margin": true },
+		"typography": { "fontSize": true, "textAlign": true }
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

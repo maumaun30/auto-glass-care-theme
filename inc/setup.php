@@ -71,3 +71,18 @@ add_filter(
 	10,
 	2
 );
+
+/**
+ * Pages built from a service page pattern open with their own hero, so use the
+ * "Page (No Title Banner)" template unless an editor picked a template explicitly.
+ */
+add_filter(
+	'page_template_hierarchy',
+	function ( array $templates ): array {
+		$page = get_queried_object();
+		if ( $page instanceof WP_Post && ! get_page_template_slug( $page ) && str_contains( $page->post_content, AGC_SERVICE_HERO_CLASS ) ) {
+			array_unshift( $templates, 'page-no-title.php' );
+		}
+		return $templates;
+	}
+);
