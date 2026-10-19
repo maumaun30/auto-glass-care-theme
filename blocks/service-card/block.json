@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/service-card",
+	"title": "Service Card",
+	"category": "auto-glass-care",
+	"icon": "car",
+	"description": "Image card that flips on hover to reveal a short description and link.",
+	"keywords": [ "flip", "service", "card" ],
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"title": { "type": "string", "default": "Service" },
+		"description": { "type": "string", "default": "" },
+		"linkUrl": { "type": "string", "default": "" },
+		"linkText": { "type": "string", "default": "Learn more" },
+		"height": { "type": "number", "default": 313 }
+	},
+	"supports": {
+		"html": false,
+		"spacing": { "margin": true },
+		"color": { "text": true, "background": false }
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

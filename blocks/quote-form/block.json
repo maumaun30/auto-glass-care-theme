@@ -1,0 +1,26 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/quote-form",
+	"title": "Quote Form",
+	"category": "auto-glass-care",
+	"icon": "feedback",
+	"description": "Vehicle quote request form. Submissions are saved under Quote Requests and emailed to the address in Theme Settings.",
+	"keywords": [ "form", "quote", "contact", "estimate" ],
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"showVehicle": { "type": "boolean", "default": true },
+		"showMessage": { "type": "boolean", "default": false },
+		"submitLabel": { "type": "string", "default": "Send" }
+	},
+	"supports": {
+		"html": false,
+		"multiple": false,
+		"anchor": true,
+		"color": { "text": true, "background": true },
+		"spacing": { "margin": true, "padding": true }
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

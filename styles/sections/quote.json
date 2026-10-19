@@ -1,0 +1,37 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Quote Panel",
+	"slug": "section-quote",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"color": {
+			"text": "var(--wp--preset--color--contrast)"
+		},
+		"border": {
+			"color": "var(--wp--preset--color--border)",
+			"style": "solid",
+			"width": "2px"
+		},
+		"spacing": {
+			"padding": {
+				"top": "var(--wp--preset--spacing--40)",
+				"bottom": "var(--wp--preset--spacing--40)",
+				"left": "var(--wp--preset--spacing--40)",
+				"right": "var(--wp--preset--spacing--40)"
+			}
+		},
+		"dimensions": {
+			"minHeight": "678px"
+		},
+		"elements": {
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--base)"
+				}
+			}
+		}
+	}
+}

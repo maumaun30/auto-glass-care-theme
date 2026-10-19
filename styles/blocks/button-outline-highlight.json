@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Outline Highlight",
+	"slug": "outline-highlight",
+	"blockTypes": [
+		"core/button"
+	],
+	"styles": {
+		"color": {
+			"background": "transparent",
+			"text": "var(--wp--preset--color--base)"
+		},
+		"border": {
+			"color": "var(--wp--preset--color--highlight)",
+			"style": "solid",
+			"width": "2px",
+			"radius": "0"
+		},
+		"spacing": {
+			"padding": {
+				"top": "14px",
+				"bottom": "14px",
+				"left": "30px",
+				"right": "30px"
+			}
+		},
+		"elements": {}
+	}
+}

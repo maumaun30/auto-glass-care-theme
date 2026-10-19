@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/copyright",
+	"title": "Copyright",
+	"category": "auto-glass-care",
+	"icon": "editor-code",
+	"description": "© start year – current year, business name and a closing text. Year and name come from Theme Settings.",
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"suffix": { "type": "string", "default": "All Rights Reserved." }
+	},
+	"supports": {
+		"html": false,
+		"color": { "text": true, "background": true, "link": true },
+		"spacing": { "margin": true, "padding": true },
+		"typography": { "fontSize": true, "textAlign": true }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

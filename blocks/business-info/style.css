@@ -1,0 +1,28 @@
+.wp-block-agc-business-info {
+	margin: 0;
+}
+
+.wp-block-agc-business-info .agc-business-info__label {
+	margin-inline-end: 0.25em;
+}
+
+.wp-block-agc-business-info a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.wp-block-agc-business-info a:hover,
+.wp-block-agc-business-info a:focus-visible {
+	text-decoration: underline;
+}
+
+/* Inside the server-render preview, links must not navigate away from the editor. */
+.editor-styles-wrapper .wp-block-agc-business-info a {
+	pointer-events: none;
+}
+
+@media (max-width: 781px) {
+	.wp-block-agc-business-info.is-hidden-mobile {
+		display: none;
+	}
+}

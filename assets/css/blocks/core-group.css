@@ -1,0 +1,14 @@
+/* core/group section components: background art for the section style variations (styles/sections/*.json). */
+.wp-block-group.is-style-section-hero,
+.wp-block-group.is-style-section-page-title {
+	background-image: url(../../images/hero-bg.webp);
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+.wp-block-group.is-style-section-quote {
+	background-image: url(../../images/quote-bg.png), var(--wp--preset--gradient--fade-border);
+	background-position: 100% 100%, 0 0;
+	background-repeat: no-repeat;
+	background-size: contain, auto;
+}

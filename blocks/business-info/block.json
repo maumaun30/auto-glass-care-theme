@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/business-info",
+	"title": "Business Info",
+	"category": "auto-glass-care",
+	"icon": "store",
+	"description": "Shows one Theme Settings value (phone, email, address, hours…) with an optional label and link.",
+	"keywords": [ "phone", "email", "address", "hours", "contact" ],
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"field": { "type": "string", "default": "phone", "enum": [ "business_name", "tagline", "subtagline", "phone", "email", "address", "hours", "service_areas" ] },
+		"label": { "type": "string", "default": "" },
+		"isLink": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false,
+		"color": { "text": true, "background": true, "link": true },
+		"spacing": { "margin": true, "padding": true },
+		"typography": { "fontSize": true, "lineHeight": true, "__experimentalFontFamily": true, "__experimentalFontWeight": true, "textAlign": true }
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,24 @@
+# Local WordPress for testing the theme: docker compose -f .dev/compose.yml up -d  → http://localhost:8089
+name: agcwp
+services:
+  db:
+    image: mariadb:11
+    environment: { MARIADB_ROOT_PASSWORD: root, MARIADB_DATABASE: wp, MARIADB_USER: wp, MARIADB_PASSWORD: wp }
+  wordpress:
+    image: wordpress:latest
+    depends_on: [db]
+    ports: ["8089:80"]
+    environment: { WORDPRESS_DB_HOST: db, WORDPRESS_DB_USER: wp, WORDPRESS_DB_PASSWORD: wp, WORDPRESS_DB_NAME: wp, WORDPRESS_DEBUG: "1" }
+    volumes:
+      - wpdata:/var/www/html
+      - ..:/var/www/html/wp-content/themes/auto-glass-care:ro
+  cli:
+    image: wordpress:cli
+    depends_on: [wordpress]
+    user: "33:33"
+    environment: { WORDPRESS_DB_HOST: db, WORDPRESS_DB_USER: wp, WORDPRESS_DB_PASSWORD: wp, WORDPRESS_DB_NAME: wp }
+    volumes:
+      - wpdata:/var/www/html
+      - ..:/var/www/html/wp-content/themes/auto-glass-care:ro
+    entrypoint: ["sleep", "infinity"]
+volumes: { wpdata: {} }

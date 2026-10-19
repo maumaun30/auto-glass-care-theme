@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/social-links",
+	"title": "Business Social Links",
+	"category": "auto-glass-care",
+	"icon": "share",
+	"description": "Social icons for every profile URL filled in under Theme Settings. Uses core Social Icons for the artwork.",
+	"textdomain": "auto-glass-care",
+	"attributes": {
+		"iconColor": { "type": "string", "default": "#ffffff" },
+		"size": { "type": "string", "default": "has-normal-icon-size", "enum": [ "has-small-icon-size", "has-normal-icon-size", "has-large-icon-size", "has-huge-icon-size" ] },
+		"logosOnly": { "type": "boolean", "default": true }
+	},
+	"supports": {
+		"html": false,
+		"spacing": { "margin": true },
+		"layout": { "allowSwitching": false, "allowInheriting": false, "allowVerticalAlignment": false, "default": { "type": "flex" } }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

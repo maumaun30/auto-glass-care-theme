@@ -1,0 +1,32 @@
+/* core/navigation component: highlight current item, menu colors follow the parent section. */
+.wp-block-navigation .wp-block-navigation-item__content {
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.wp-block-navigation .current-menu-item > .wp-block-navigation-item__content,
+.wp-block-navigation .wp-block-navigation-item__content:hover,
+.wp-block-navigation .wp-block-navigation-item__content:focus-visible {
+	color: var(--wp--preset--color--highlight);
+}
+
+.wp-block-navigation:not(.has-background) .wp-block-navigation__submenu-container {
+	border: 0;
+	background-color: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--base);
+}
+
+.wp-block-navigation__submenu-container .wp-block-navigation-item__content {
+	padding: 10px 15px;
+}
+
+.wp-block-navigation:not(.has-background) .wp-block-navigation__responsive-container.is-menu-open {
+	background-color: var(--wp--preset--color--accent);
+	color: var(--wp--preset--color--base);
+}
+
+.wp-block-navigation__responsive-container-open {
+	padding: 6px;
+	background-color: var(--wp--preset--color--highlight);
+	color: var(--wp--preset--color--contrast);
+}

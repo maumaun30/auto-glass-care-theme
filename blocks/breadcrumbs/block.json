@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "agc/breadcrumbs",
+	"title": "Breadcrumbs",
+	"category": "auto-glass-care",
+	"icon": "arrow-right-alt2",
+	"description": "Home › parent pages › current page.",
+	"textdomain": "auto-glass-care",
+	"usesContext": [ "postId", "postType" ],
+	"attributes": {
+		"homeLabel": { "type": "string", "default": "Home" }
+	},
+	"supports": {
+		"html": false,
+		"color": { "text": true, "link": true },
+		"spacing": { "margin": true },
+		"typography": { "fontSize": true, "textAlign": true }
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style.css",
+	"render": "file:./render.php"
+}

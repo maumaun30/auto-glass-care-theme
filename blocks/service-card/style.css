@@ -1,0 +1,103 @@
+.wp-block-agc-service-card {
+	--agc-card-height: 313px;
+	--agc-card-radius: 15px;
+	--agc-card-overlay: rgba(0, 0, 0, 0.45);
+	color: var(--wp--preset--color--base);
+	perspective: 1000px;
+}
+
+.wp-block-agc-service-card .agc-service-card__inner {
+	position: relative;
+	display: block;
+	height: var(--agc-card-height);
+	color: inherit;
+	text-decoration: none;
+	transform-style: preserve-3d;
+	transition: transform 0.6s ease;
+}
+
+.wp-block-agc-service-card:hover .agc-service-card__inner,
+.wp-block-agc-service-card .agc-service-card__inner:focus-visible {
+	transform: rotateY(180deg);
+}
+
+.wp-block-agc-service-card .agc-service-card__inner:focus-visible {
+	outline: 3px solid var(--wp--preset--color--highlight);
+	outline-offset: 4px;
+}
+
+.wp-block-agc-service-card .agc-service-card__face {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	padding: 30px;
+	border-radius: var(--agc-card-radius);
+	overflow: hidden;
+	background: var(--agc-card-image, var(--wp--preset--color--dark)) center / cover no-repeat;
+	backface-visibility: hidden;
+}
+
+.wp-block-agc-service-card .agc-service-card__front {
+	background-image: var(--wp--preset--gradient--overlay-dark), var(--agc-card-image, none);
+}
+
+.wp-block-agc-service-card .agc-service-card__back {
+	transform: rotateY(180deg);
+	background-image: linear-gradient(var(--agc-card-overlay), var(--agc-card-overlay)), var(--agc-card-image, none);
+}
+
+.wp-block-agc-service-card .agc-service-card__title {
+	margin: 0;
+	font-family: var(--wp--preset--font-family--heading);
+	font-size: 1.5rem;
+	font-weight: 400;
+	line-height: 1.2;
+	text-transform: capitalize;
+	color: inherit;
+}
+
+.wp-block-agc-service-card .agc-service-card__back .agc-service-card__title {
+	font-size: 1.875rem;
+	font-weight: 500;
+}
+
+.wp-block-agc-service-card .agc-service-card__description {
+	margin: 0;
+	font-size: 1rem;
+	line-height: 1.625;
+}
+
+.wp-block-agc-service-card .agc-service-card__more {
+	align-self: flex-start;
+	margin-top: 0.5rem;
+	padding: 8px 20px;
+	background: var(--wp--preset--color--accent);
+	font-size: 0.9375rem;
+	font-weight: 500;
+	text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-agc-service-card .agc-service-card__inner {
+		transition: none;
+	}
+
+	.wp-block-agc-service-card:hover .agc-service-card__inner,
+	.wp-block-agc-service-card .agc-service-card__inner:focus-visible {
+		transform: none;
+	}
+
+	.wp-block-agc-service-card .agc-service-card__back {
+		transform: none;
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
+
+	.wp-block-agc-service-card:hover .agc-service-card__back,
+	.wp-block-agc-service-card .agc-service-card__inner:focus-visible .agc-service-card__back {
+		opacity: 1;
+	}
+}

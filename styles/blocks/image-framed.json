@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Framed",
+	"slug": "framed",
+	"blockTypes": [
+		"core/image"
+	],
+	"styles": {
+		"border": {
+			"color": "var(--wp--preset--color--base)",
+			"style": "solid",
+			"width": "3px"
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"title": "Brand Display",
+	"slug": "brand-display",
+	"blockTypes": [
+		"core/heading"
+	],
+	"styles": {
+		"typography": {
+			"fontFamily": "var(--wp--preset--font-family--heading)",
+			"fontSize": "var(--wp--preset--font-size--display)",
+			"fontStyle": "italic",
+			"fontWeight": "500",
+			"lineHeight": "1",
+			"textTransform": "uppercase"
+		}
+	}
+}
