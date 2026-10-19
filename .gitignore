@@ -4,3 +4,4 @@ node_modules/
 *.zip
 # Local DB dumps (contain user hashes)
 .dev/*.sql
+dist/
